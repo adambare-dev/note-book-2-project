@@ -13,18 +13,19 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 1rem; /* Scaled down padding for smaller screens */
 }
 
-/* Container */
+/* Container - Responsive Widths */
 .task-tracker-container {
   background-color: #1a1a1e;
   width: 100%;
-  max-width: 420px;
+  max-width: 440px; /* Maximum size on desktop */
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   text-align: center;
+  transition: padding 0.3s ease;
 }
 
 /* Header Section */
@@ -44,7 +45,7 @@ body {
 
 .shop-cart-icon {
   font-size: 1.5rem;
-  color: #a78bfa; /* Soft violet/purple accent */
+  color: #a78bfa; /* Accent purple */
 }
 
 /* Input Containers (Search & Add Note) */
@@ -58,13 +59,14 @@ body {
 
 .search-nput, .input-item {
   width: 100%;
-  padding: 12px 40px 12px 14px;
+  padding: 12px 44px 12px 14px; /* Added right padding so text doesn't hit the icon */
   background-color: #26262b;
   border: 1px solid #3f3f46;
   border-radius: 8px;
   color: #ffffff;
   font-size: 1rem;
   transition: all 0.2s ease;
+  appearance: none; /* Removes default iOS input styling shadow */
 }
 
 .search-nput:focus, .input-item:focus {
@@ -77,10 +79,11 @@ body {
 .search-icon, .add-icon {
   position: absolute;
   right: 14px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #71717a;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 4px; /* Makes icons easier to tap on mobile */
 }
 
 .add-icon:hover {
@@ -91,12 +94,22 @@ body {
 /* Notes List Group */
 .items-group {
   margin-top: 1.5rem;
-  max-height: 300px;
+  max-height: 320px; /* Prevents app from growing too tall */
   overflow-y: auto;
+  padding-right: 2px; /* Space for scrollbar */
+}
+
+/* Custom Scrollbar styling for a cleaner look */
+.items-group::-webkit-scrollbar {
+  width: 6px;
+}
+.items-group::-webkit-scrollbar-thumb {
+  background-color: #3f3f46;
+  border-radius: 3px;
 }
 
 .items-group ul {
-  list-style: none; /* Removes the bullet point */
+  list-style: none;
 }
 
 .items-group li {
@@ -117,8 +130,8 @@ body {
 
 /* Checkbox & Text Alignment */
 .items-group li input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  min-width: 20px; /* Prevents checkbox shrinking on wrapping text */
+  min-height: 20px;
   accent-color: #a78bfa;
   cursor: pointer;
 }
@@ -126,9 +139,10 @@ body {
 .items-group li span {
   flex-grow: 1;
   text-align: left;
-  margin: 0 12px;
+  margin: 0 14px;
   font-size: 1rem;
-  word-break: break-all;
+  word-break: break-word; /* Prevents long text from breaking layout */
+  color: #e2e8f0;
 }
 
 /* Completed Note Styling */
@@ -138,27 +152,26 @@ body {
 }
 
 .items-group li.complited {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* Delete Button */
 .delete-btn {
   background: none;
   border: none;
-  color: #f43f5e; /* Red/Rose color */
+  color: #f43f5e;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  border-radius: 4px;
+  padding: 6px; /* Enhanced touch target size for mobile */
+  border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 .delete-btn:hover {
   background-color: rgba(244, 63, 94, 0.1);
-  transform: scale(1.05);
 }
 
 /* Footer Counter Note */
@@ -167,4 +180,24 @@ body {
   font-size: 0.9rem;
   color: #94a3b8;
   font-weight: 500;
+}
+
+/* --- Media Queries for Mobile Responsiveness --- */
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem; /* Tighter padding around screen edges on ultra-small displays */
+  }
+
+  .task-tracker-container {
+    padding: 1.25rem; /* Gives more screen real estate to the content */
+    border-radius: 10px;
+  }
+
+  .header-sect h2 {
+    font-size: 1.5rem; /* Slightly smaller header text */
+  }
+
+  .search-nput, .input-item, .items-group li span {
+    font-size: 0.95rem; /* Optimized mobile font scaling */
+  }
 }
